@@ -1,0 +1,14 @@
+/Users/piotrturlej/Desktop/Projects/Courses/NetCoreCourse/UserAuth/UserAuth.API/bin/Debug/netcoreapp2.1/UserAuth.API.deps.json
+/Users/piotrturlej/Desktop/Projects/Courses/NetCoreCourse/UserAuth/UserAuth.API/bin/Debug/netcoreapp2.1/UserAuth.API.runtimeconfig.json
+/Users/piotrturlej/Desktop/Projects/Courses/NetCoreCourse/UserAuth/UserAuth.API/bin/Debug/netcoreapp2.1/UserAuth.API.runtimeconfig.dev.json
+/Users/piotrturlej/Desktop/Projects/Courses/NetCoreCourse/UserAuth/UserAuth.API/bin/Debug/netcoreapp2.1/UserAuth.API.dll
+/Users/piotrturlej/Desktop/Projects/Courses/NetCoreCourse/UserAuth/UserAuth.API/bin/Debug/netcoreapp2.1/UserAuth.API.pdb
+/Users/piotrturlej/Desktop/Projects/Courses/NetCoreCourse/UserAuth/UserAuth.API/obj/Debug/netcoreapp2.1/UserAuth.API.csprojAssemblyReference.cache
+/Users/piotrturlej/Desktop/Projects/Courses/NetCoreCourse/UserAuth/UserAuth.API/obj/Debug/netcoreapp2.1/UserAuth.API.csproj.CoreCompileInputs.cache
+/Users/piotrturlej/Desktop/Projects/Courses/NetCoreCourse/UserAuth/UserAuth.API/obj/Debug/netcoreapp2.1/UserAuth.API.RazorAssemblyInfo.cache
+/Users/piotrturlej/Desktop/Projects/Courses/NetCoreCourse/UserAuth/UserAuth.API/obj/Debug/netcoreapp2.1/UserAuth.API.RazorAssemblyInfo.cs
+/Users/piotrturlej/Desktop/Projects/Courses/NetCoreCourse/UserAuth/UserAuth.API/obj/Debug/netcoreapp2.1/UserAuth.API.AssemblyInfoInputs.cache
+/Users/piotrturlej/Desktop/Projects/Courses/NetCoreCourse/UserAuth/UserAuth.API/obj/Debug/netcoreapp2.1/UserAuth.API.AssemblyInfo.cs
+/Users/piotrturlej/Desktop/Projects/Courses/NetCoreCourse/UserAuth/UserAuth.API/obj/Debug/netcoreapp2.1/UserAuth.API.RazorTargetAssemblyInfo.cache
+/Users/piotrturlej/Desktop/Projects/Courses/NetCoreCourse/UserAuth/UserAuth.API/obj/Debug/netcoreapp2.1/UserAuth.API.dll
+/Users/piotrturlej/Desktop/Projects/Courses/NetCoreCourse/UserAuth/UserAuth.API/obj/Debug/netcoreapp2.1/UserAuth.API.pdb

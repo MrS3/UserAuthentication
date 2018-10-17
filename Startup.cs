@@ -3,14 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using UserAuth.API.Helpers;
+using UserAuth.API.Services;
 
 namespace UserAuth.API
 {
@@ -24,17 +27,19 @@ namespace UserAuth.API
             var appSettingsSection = Configuration.GetSection("AppSettings");
             services.Configure<AppSettings>(appSettingsSection);
             var appSettings = Configuration.Get<AppSettings>();
-            var key = Encoding.ASCII.GetBytes(appSettings.Secret);
             
+            services.AddDbContext<DataContext>(x => x.UseInMemoryDatabase("Testdb"));
+            services.AddAutoMapper();
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer( options => {
                 options.TokenValidationParameters = new TokenValidationParameters
                 {
                     ValidateIssuerSigningKey = true,
-                    IssuerSigningKey = new SymmetricSecurityKey(key),
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(appSettings.Secret)),
                     ValidateIssuer = false,
                     ValidateAudience = false
                 };
             });
+            services.AddScoped<IUserService, UserService>();
             services.AddMvc();
         }
 
@@ -45,6 +50,7 @@ namespace UserAuth.API
             {
                 app.UseDeveloperExceptionPage();
             }
+            app.UseAuthentication();
             app.UseMvc();
         }
     }
