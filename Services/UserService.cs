@@ -22,9 +22,12 @@ namespace UserAuth.API.Services
             throw new System.NotImplementedException();
         }
 
-        public Task<User> Login(string username, string passsword)
+        public async Task<User> Login(string username, string passsword)
         {
-            throw new System.NotImplementedException();
+            var user = await _context.Users.FirstOrDefaultAsync(x => x.Name == username);
+             if (user == null || !PasswordHash.VerifyPassword(passsword, user.PasswordSalt, user.PasswordHash))
+                return null;
+           return user;
         }
 
         public async Task<User> Register(User user, string password)

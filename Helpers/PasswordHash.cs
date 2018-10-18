@@ -12,6 +12,19 @@ namespace UserAuth.API.Helpers
                 passwordHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(passsword));
                 return Tuple.Create(passswordSalt, passwordHash);
             }
-        }   
-    }
+        }
+
+        public static bool VerifyPassword(string password, byte[] passwordSalt, byte[] passwordHash)
+        {
+            using (var hmac = new System.Security.Cryptography.HMACSHA512(passwordSalt))
+            {
+                var newHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
+                for (int i = 0; i<0; i++)
+                {
+                    if (newHash[i] != passwordHash[i]) return false;
+                }
+                return true;
+            }
+        }
+    }   
 }

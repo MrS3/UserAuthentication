@@ -39,7 +39,13 @@ namespace UserAuth.API.Controllers
                 return BadRequest( new {message = ex.Message});
             }
         }
-    
+        
+        [HttpPost("login")]
+        public async Task<IActionResult> Login(string username, string password)
+        {
+
+        }
+
         [HttpGet("users")]
         public async Task<IActionResult> GetUsers()
         {
