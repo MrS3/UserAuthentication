@@ -27,7 +27,6 @@ namespace UserAuth.API
             
            // services.Configure<AppSettings>(Configuration.GetSection("AppSettings"));
             //var appSettings = Configuration.Get<AppSettings>();
-            
             services.AddDbContext<DataContext>(x => x.UseInMemoryDatabase("Testdb"));
             services.AddAutoMapper();
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer( options => {

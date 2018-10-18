@@ -26,7 +26,7 @@ namespace UserAuth.API.Services
         {
             var user = await _context.Users.FirstOrDefaultAsync(x => x.Name == username);
              if (user == null || !PasswordHash.VerifyPassword(passsword, user.PasswordSalt, user.PasswordHash))
-                return null;
+                throw new Exception("Password or Login incorrect");
            return user;
         }
 
