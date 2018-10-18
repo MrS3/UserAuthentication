@@ -29,6 +29,10 @@ namespace UserAuth.API.Services
 
         public async Task<User> Register(User user, string password)
         {
+            if (await _context.Users.AnyAsync( x => x.Name == user.Name))
+                throw new AppException("Username " + user.Name + "already exist");
+
+
             var hashData = PasswordHash.CreatePasswordHash(password, user.PasswordHash, user.PasswordSalt);
             await _context.Users.AddAsync(user);
             await _context.SaveChangesAsync();
