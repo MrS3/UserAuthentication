@@ -32,32 +32,14 @@ namespace UserAuth.API.Services
             if (await _context.Users.AnyAsync( x => x.Name == user.Name))
                 throw new AppException("Username " + user.Name + "already exist");
 
-
             var hashData = PasswordHash.CreatePasswordHash(password, user.PasswordHash, user.PasswordSalt);
+            user.PasswordSalt = hashData.Item1;
+            user.PasswordHash = hashData.Item2;
             await _context.Users.AddAsync(user);
             await _context.SaveChangesAsync();
             return user;
         }
 
-        public async Task<List<User>> Users()
-        {
-            return await _context.Users.ToListAsync();
-        }
+        public async Task<List<User>> Users() => await _context.Users.ToListAsync();
     }
-}
-
-
-
-public static class PasswordHash
-{
-    //public PasswordHash() {}
-    public static Tuple<byte[], byte[]> CreatePasswordHash(string passsword, byte[] passwordHash, byte[] passswordSalt)
-    {
-        using ( var hmac = new System.Security.Cryptography.HMACSHA512())
-        {
-            passswordSalt = hmac.Key;
-            passwordHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(passsword));
-            return Tuple.Create(passwordHash, passswordSalt);
-        }
-    }   
 }

@@ -18,7 +18,8 @@ namespace UserAuth.API.Controllers
             _userService = userService;
             _mapper = mapper;
         }
-        [HttpPost]
+
+        [HttpPost("register")]
         public async Task<IActionResult> RegisterUser(UserDto userDto)
         {
             if (!ModelState.IsValid) 
@@ -37,6 +38,13 @@ namespace UserAuth.API.Controllers
             {
                 return BadRequest( new {message = ex.Message});
             }
+        }
+    
+        [HttpGet("users")]
+        public async Task<IActionResult> GetUsers()
+        {
+            var users = await _userService.Users();
+            return Ok(users);
         }
     }
 }
