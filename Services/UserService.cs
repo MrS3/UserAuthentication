@@ -21,39 +21,7 @@ namespace UserAuth.API.Services
         {
             throw new System.NotImplementedException();
         }
-
-        public Task<User> Login(string username, string passsword)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public async Task<User> Register(User user, string password)
-        {
-            var hashData = PasswordHash.CreatePasswordHash(password, user.PasswordHash, user.PasswordSalt);
-            await _context.Users.AddAsync(user);
-            await _context.SaveChangesAsync();
-            return user;
-        }
-
-        public async Task<List<User>> Users()
-        {
-            return await _context.Users.ToListAsync();
-        }
+        
+        public async Task<List<User>> Users() => await _context.Users.ToListAsync();
     }
-}
-
-
-
-public static class PasswordHash
-{
-    //public PasswordHash() {}
-    public static Tuple<byte[], byte[]> CreatePasswordHash(string passsword, byte[] passwordHash, byte[] passswordSalt)
-    {
-        using ( var hmac = new System.Security.Cryptography.HMACSHA512())
-        {
-            passswordSalt = hmac.Key;
-            passwordHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(passsword));
-            return Tuple.Create(passwordHash, passswordSalt);
-        }
-    }   
 }

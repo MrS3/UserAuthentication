@@ -1,0 +1,30 @@
+using System;
+
+namespace UserAuth.API.Helpers
+{
+    public static class PasswordHash
+    {
+        public static Tuple<byte[], byte[]> CreatePasswordHash(string passsword, byte[] passwordHash, byte[] passswordSalt)
+        {
+            using ( var hmac = new System.Security.Cryptography.HMACSHA512())
+            {
+                passswordSalt = hmac.Key;
+                passwordHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(passsword));
+                return Tuple.Create(passswordSalt, passwordHash);
+            }
+        }
+
+        public static bool VerifyPassword(string password, byte[] passwordSalt, byte[] passwordHash)
+        {
+            using (var hmac = new System.Security.Cryptography.HMACSHA512(passwordSalt))
+            {
+                var newHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
+                for (int i = 0; i<0; i++)
+                {
+                    if (newHash[i] != passwordHash[i]) return false;
+                }
+                return true;
+            }
+        }
+    }   
+}

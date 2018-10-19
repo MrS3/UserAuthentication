@@ -24,17 +24,16 @@ namespace UserAuth.API
        
         public void ConfigureServices(IServiceCollection services)
         {   
-            var appSettingsSection = Configuration.GetSection("AppSettings");
-            services.Configure<AppSettings>(appSettingsSection);
-            var appSettings = Configuration.Get<AppSettings>();
             
+           // services.Configure<AppSettings>(Configuration.GetSection("AppSettings"));
+            //var appSettings = Configuration.Get<AppSettings>();
             services.AddDbContext<DataContext>(x => x.UseInMemoryDatabase("Testdb"));
             services.AddAutoMapper();
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer( options => {
                 options.TokenValidationParameters = new TokenValidationParameters
                 {
                     ValidateIssuerSigningKey = true,
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(appSettings.Secret)),
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(Configuration.GetSection("AppSettings:Secret").Value)),
                     ValidateIssuer = false,
                     ValidateAudience = false
                 };
@@ -48,7 +47,7 @@ namespace UserAuth.API
         {
             if (env.IsDevelopment())
             {
-                app.UseDeveloperExceptionPage();
+                //app.UseDeveloperExceptionPage();
             }
             app.UseAuthentication();
             app.UseMvc();
