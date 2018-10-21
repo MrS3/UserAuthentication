@@ -39,6 +39,7 @@ namespace UserAuth.API
                 };
             });
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IUserAuthorizationService, UserAuthorizationService>();
             services.AddMvc();
         }
 

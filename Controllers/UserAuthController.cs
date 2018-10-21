@@ -14,7 +14,7 @@ using UserAuth.API.Services;
 
 namespace UserAuth.API.Controllers
 {
-    [Route("/api[controller]")]
+    [Route("api/[controller]")]
     [ApiController]
     public class UserAuthController: ControllerBase
     {
