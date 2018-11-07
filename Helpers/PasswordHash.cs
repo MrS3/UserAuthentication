@@ -4,24 +4,25 @@ namespace UserAuth.API.Helpers
 {
     public static class PasswordHash
     {
-        public static Tuple<byte[], byte[]> CreatePasswordHash(string passsword, byte[] passwordHash, byte[] passswordSalt)
+        public static (byte[], byte[]) CreatePasswordHash(string passsword, byte[] passwordHash, byte[] passswordSalt)
         {
             using ( var hmac = new System.Security.Cryptography.HMACSHA512())
             {
                 passswordSalt = hmac.Key;
                 passwordHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(passsword));
-                return Tuple.Create(passswordSalt, passwordHash);
+                return (passswordSalt, passwordHash);
             }
         }
 
-        public static bool VerifyPassword(string password, byte[] passwordSalt, byte[] passwordHash)
+        public static bool VerifyPassword(string password, byte[] passwordHash, byte[] passwordSalt)
         {
-            using (var hmac = new System.Security.Cryptography.HMACSHA512(passwordSalt))
+            using (var hmac = new System.Security.Cryptography.HMACSHA512(key: passwordSalt))
             {
                 var newHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
-                for (int i = 0; i<0; i++)
+                for (int i = 0; i < passwordHash.Length; i++)
                 {
-                    if (newHash[i] != passwordHash[i]) return false;
+                    if (newHash[i] != passwordHash[i]) 
+                        return false;
                 }
                 return true;
             }

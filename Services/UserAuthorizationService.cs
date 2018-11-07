@@ -5,7 +5,7 @@ using UserAuth.API.Models;
 
 namespace UserAuth.API.Services
 {
-    public class UserAuthorizationService
+    public class UserAuthorizationService: IUserAuthorizationService
     {
         private readonly DataContext _context;
         public UserAuthorizationService(DataContext context) => _context = context;
@@ -13,8 +13,13 @@ namespace UserAuth.API.Services
         public async Task<User> Login(string username, string passsword)
         {
             var user = await _context.Users.FirstOrDefaultAsync(x => x.Name == username);
-             if (user == null || !PasswordHash.VerifyPassword(passsword, user.PasswordSalt, user.PasswordHash))
-                throw new AppException("Password or Login incorrect");
+          
+             if (user == null)
+                throw new AppException("User not exist");
+        
+              if (!PasswordHash.VerifyPassword(passsword, user.PasswordHash, user.PasswordSalt))
+                throw new AppException("Password incorrect");
+          
            return user;
         }
 

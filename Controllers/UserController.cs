@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
@@ -33,7 +34,12 @@ namespace UserAuth.API.Controllers
         public async Task<IActionResult> GetUsers()
         {
             var users = await _userService.Users();
-            return Ok(users);
+            var mappedUsers = new List<UserDto>(); 
+            foreach (User user in users)
+            {
+                mappedUsers.Add(_mapper.Map<UserDto>(user));
+            }
+            return Ok(mappedUsers);
         }
     }
 }
